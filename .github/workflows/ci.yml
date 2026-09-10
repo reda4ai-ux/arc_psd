@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "phase/**"]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - run: dotnet restore Company.Archive.slnx
+      - run: dotnet build Company.Archive.slnx --configuration Release --no-restore
+      - run: dotnet test Company.Archive.slnx --configuration Release --no-build
