@@ -1,3 +1,4 @@
+using Xunit;
 using Company.Archive.Domain.Organization;
 
 namespace Company.Archive.Domain.Tests.Organization;
